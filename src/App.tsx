@@ -4,7 +4,7 @@ import Table from './Table';
 
 const App: React.FC = () => {
     return (
-      
+      // routing for the desired page
         <Router>
             <Routes>
                 <Route path="/artworks/page/:pageNumber" element={<Table />} />

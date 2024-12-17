@@ -34,7 +34,7 @@ const Table: React.FC = () => {
         fetch(`https://api.artic.edu/api/v1/artworks?page=${pageNumber}`)    // fetching the data for displaying the data
             .then((response) => response.json())
             .then((data) => {
-                setArtworks(data.data);
+                setArtworks(data.data); // getting data from the api and storing it in state
                 setTotalRecords(data.pagination.total); // storing the total number of records in a state
                 setLoading(false);
             })
@@ -57,7 +57,7 @@ const Table: React.FC = () => {
 
         while (rowsToSelectRemaining > 0 && selectedRows.length < totalRecords) {  // while loop to get the remaining rows which are left before the rows which are paginated on the previous set of rows are previous page
             const fetchedRows = await fetchPage(currentPage);
-            const rowsToAdd = fetchedRows.slice(0, rowsToSelectRemaining);
+            const rowsToAdd = fetchedRows.slice(0, rowsToSelectRemaining); // rows to be added to the next page
             selectedRows = [...selectedRows, ...rowsToAdd];
             rowsToSelectRemaining -= rowsToAdd.length;
             currentPage++;   //incrementing the page for selecting the rows on the next page
@@ -95,7 +95,7 @@ const Table: React.FC = () => {
                 showGridlines
                 paginator
                 rows={5}   // default rows
-                rowsPerPageOptions={[5, 10, 15, 20, 25]}  // row variability
+                rowsPerPageOptions={[5, 10, 15, 20, 25]}  // Selections for how many rows user want to see on the screen at a time
                 loading={loading}
                 tableStyle={{ minWidth: '80rem', minHeight: '50rem' }}
             >
@@ -105,7 +105,7 @@ const Table: React.FC = () => {
                 ))}
             </DataTable>
             <OverlayPanel   // OverlayPanel for selecting the number of rows to be selected
-                ref={op}
+                ref={op} // reference for using methods in OverlayPanel
                 style={{ width: '300px' }}
                 className="custom-overlay"
                 dismissable={true}
@@ -124,8 +124,8 @@ const Table: React.FC = () => {
             </OverlayPanel>
             <div>
                 <div className="pagination-controls">
-                    {[1, 2, 3, 4, 5].map((page) => ( // routing for the desired page for the user
-                        <Link key={page} to={`/artworks/page/${page}`} style={{ marginRight: '10px' }} className="p-button p-button-text"> 
+                    {[1, 2, 3, 4, 5].map((page) => ( // routing for the desired page for the user using Link tag of react router dom
+                        <Link key={page} to={`/artworks/page/${page}`} style={{ marginRight: '10px' }} className="p-button p-button-text">
                             <Button label={`Page ${page}`} rounded />
                         </Link>
                     ))}
